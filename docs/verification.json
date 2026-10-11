@@ -1,0 +1,47 @@
+{
+  "browser": "Google Chrome (headless)",
+  "viewports": [
+    {
+      "width": 1440,
+      "horizontalOverflow": 0,
+      "brokenImages": 0,
+      "runtimeErrors": 0
+    },
+    {
+      "width": 390,
+      "horizontalOverflow": 0,
+      "brokenImages": 0,
+      "runtimeErrors": 0
+    },
+    {
+      "width": 320,
+      "horizontalOverflow": 0,
+      "brokenImages": 0,
+      "runtimeErrors": 0
+    },
+    {
+      "width": 768,
+      "horizontalOverflow": 0,
+      "brokenImages": 0,
+      "runtimeErrors": 0
+    },
+    {
+      "width": 1024,
+      "horizontalOverflow": 0,
+      "brokenImages": 0,
+      "runtimeErrors": 0
+    }
+  ],
+  "checks": [
+    "Production Vite build",
+    "Local image loading",
+    "Horizontal overflow",
+    "Mobile menu open and section navigation",
+    "Carousel previous and next controls",
+    "Unconfigured enquiry feedback"
+  ],
+  "figmaFrames": [
+    "270:9793",
+    "270:10269"
+  ]
+}

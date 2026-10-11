@@ -1,0 +1,158 @@
+{
+  "figmaFileKey": "QWpPPgqMp6KFqeTyOjC3yP",
+  "desktopFrame": "270:9793",
+  "mobileFrame": "270:10269",
+  "note": "Original Figma exports. Byte-identical mobile images reuse desktop exports. SVGs retain their original root dimensions.",
+  "assets": [
+    {
+      "file": "public/assets/desktop-logo.svg",
+      "figmaReference": "imgLogo",
+      "frame": "270:9793"
+    },
+    {
+      "file": "public/assets/desktop-header4.png",
+      "figmaReference": "imgHeader4",
+      "frame": "270:9793"
+    },
+    {
+      "file": "public/assets/desktop-021.png",
+      "figmaReference": "img021",
+      "frame": "270:9793"
+    },
+    {
+      "file": "public/assets/desktop-3820230610-kidsup-photo-shoot-akabane1.png",
+      "figmaReference": "img3820230610KidsupPhotoShootAkabane1",
+      "frame": "270:9793"
+    },
+    {
+      "file": "public/assets/desktop-a1.png",
+      "figmaReference": "imgA1",
+      "frame": "270:9793"
+    },
+    {
+      "file": "public/assets/desktop-011.png",
+      "figmaReference": "img011",
+      "frame": "270:9793"
+    },
+    {
+      "file": "public/assets/desktop-022.png",
+      "figmaReference": "img022",
+      "frame": "270:9793"
+    },
+    {
+      "file": "public/assets/desktop-031.png",
+      "figmaReference": "img031",
+      "frame": "270:9793"
+    },
+    {
+      "file": "public/assets/desktop-logo1.svg",
+      "figmaReference": "imgLogo1",
+      "frame": "270:9793"
+    },
+    {
+      "file": "public/assets/desktop-header3.svg",
+      "figmaReference": "imgHeader3",
+      "frame": "270:9793"
+    },
+    {
+      "file": "public/assets/desktop-line1.svg",
+      "figmaReference": "imgLine1",
+      "frame": "270:9793"
+    },
+    {
+      "file": "public/assets/desktop-ellipse10.svg",
+      "figmaReference": "imgEllipse10",
+      "frame": "270:9793"
+    },
+    {
+      "file": "public/assets/desktop-line2.svg",
+      "figmaReference": "imgLine2",
+      "frame": "270:9793"
+    },
+    {
+      "file": "public/assets/desktop-line3.svg",
+      "figmaReference": "imgLine3",
+      "frame": "270:9793"
+    },
+    {
+      "file": "public/assets/desktop-frame108.svg",
+      "figmaReference": "imgFrame108",
+      "frame": "270:9793"
+    },
+    {
+      "file": "public/assets/desktop-chevron-forward24-dp-e3-e3-e3-fill0-wght600-grad0-opsz241.svg",
+      "figmaReference": "imgChevronForward24DpE3E3E3Fill0Wght600Grad0Opsz241",
+      "frame": "270:9793"
+    },
+    {
+      "file": "public/assets/desktop-polygon1.svg",
+      "figmaReference": "imgPolygon1",
+      "frame": "270:9793"
+    },
+    {
+      "file": "public/assets/desktop-polygon3.svg",
+      "figmaReference": "imgPolygon3",
+      "frame": "270:9793"
+    },
+    {
+      "file": "public/assets/desktop-frame97.svg",
+      "figmaReference": "imgFrame97",
+      "frame": "270:9793"
+    },
+    {
+      "file": "public/assets/desktop-frame99.svg",
+      "figmaReference": "imgFrame99",
+      "frame": "270:9793"
+    },
+    {
+      "file": "public/assets/desktop-frame100.svg",
+      "figmaReference": "imgFrame100",
+      "frame": "270:9793"
+    },
+    {
+      "file": "public/assets/desktop-polygon2.svg",
+      "figmaReference": "imgPolygon2",
+      "frame": "270:9793"
+    },
+    {
+      "file": "public/assets/mobile-menu24-dp-e3-e3-e3-fill0-wght600-grad0-opsz241.svg",
+      "figmaReference": "imgMenu24DpE3E3E3Fill0Wght600Grad0Opsz241",
+      "frame": "270:10269"
+    },
+    {
+      "file": "public/assets/mobile-line1.svg",
+      "figmaReference": "imgLine1",
+      "frame": "270:10269"
+    },
+    {
+      "file": "public/assets/mobile-line3.svg",
+      "figmaReference": "imgLine3",
+      "frame": "270:10269"
+    },
+    {
+      "file": "public/assets/mobile-polygon4.svg",
+      "figmaReference": "imgPolygon4",
+      "frame": "270:10269"
+    },
+    {
+      "file": "public/assets/mobile-chevron-forward24-dp-e3-e3-e3-fill0-wght600-grad0-opsz241.svg",
+      "figmaReference": "imgChevronForward24DpE3E3E3Fill0Wght600Grad0Opsz241",
+      "frame": "270:10269"
+    },
+    {
+      "file": "public/assets/mobile-line4.svg",
+      "figmaReference": "imgLine4",
+      "frame": "270:10269"
+    },
+    {
+      "file": "public/assets/mobile-frame99.svg",
+      "figmaReference": "imgFrame99",
+      "frame": "270:10269"
+    },
+    {
+      "file": "public/assets/mobile-polygon2.svg",
+      "figmaReference": "imgPolygon2",
+      "frame": "270:10269"
+    }
+  ]
+}
