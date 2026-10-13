@@ -1,6 +1,6 @@
 import { afterEach, beforeEach, test } from 'node:test';
 import assert from 'node:assert/strict';
-import { initInquiryForm } from '../src/inquiry-form.js';
+import { getRecaptchaToken, initInquiryForm } from '../src/inquiry-form.js';
 
 const originalDocument = globalThis.document;
 const originalFormData = globalThis.FormData;
@@ -148,4 +148,19 @@ test('preserves edits made while an earlier submission is pending', async () => 
   await submitting;
   assert.equal(form.resetCount, 0);
   assert.equal(form.values.email, 'edited@example.com');
+});
+
+test('submits without loading reCAPTCHA when no site key is configured', async () => {
+  const form = makeForm();
+  let captured;
+  initInquiryForm(form, { ...defaults, siteKey: '', captchaToken: getRecaptchaToken,
+    fetchRequest: async (_url, options) => {
+      captured = JSON.parse(options.body);
+      return accepted();
+    },
+  });
+  await form.submit();
+  assert.equal(captured.recaptcha_token, '');
+  assert.equal(form.status.dataset.state, 'success');
+  assert.equal(form.resetCount, 1);
 });
