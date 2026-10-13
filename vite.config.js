@@ -10,10 +10,11 @@ function redirectCanonicalPages(request, response, next) {
 }
 
 export default defineConfig({
+  appType: 'mpa',
   build: { rollupOptions: { input: generatePages() } },
   plugins: [{
     name: 'static-content',
-    transformIndexHtml: sharedHtml,
+    transformIndexHtml: { order: 'pre', handler: sharedHtml },
     configureServer(server) {
       server.middlewares.use(redirectCanonicalPages);
       const sources = ['content/news', 'content/legal', 'templates', 'src/partials'].map(path => resolve(path));

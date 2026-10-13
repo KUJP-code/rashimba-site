@@ -18,6 +18,8 @@ npm run preview
 
 Deploy the generated `dist/` directory to any static host. No backend or runtime framework is required.
 
+SEO metadata, canonical URLs, structured data, `sitemap.xml`, and `robots.txt` are generated at build time for `https://rashimba.com`. Set `SITE_URL` to change the official HTTPS origin. Cloudflare builds from `deploy` allow indexing on the custom domain; other branches and all `pages.dev` copies receive `noindex`. Optimized WebP copies are served where available, while the original Figma assets are retained. Run `node --test tests/*.test.*` for the SEO and form checks.
+
 ## Content and styling
 
 - `index.html`: Japanese page content and semantic markup.

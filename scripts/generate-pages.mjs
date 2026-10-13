@@ -1,6 +1,7 @@
 import { readFileSync, readdirSync, mkdirSync, writeFileSync, rmSync } from 'node:fs';
 import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { seoHtml, plainText } from './seo.mjs';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
 const read = (path) => readFileSync(resolve(root, path), 'utf8');
@@ -29,12 +30,14 @@ function newsList(articles) {
   return `<ul class="news-list">${articles.map(article => `<li><a href="/news/${article.slug}/"><time datetime="${article.date}">${article.date.replaceAll('-', '.')}</time><p>${escape(article.title)}</p></a></li>`).join('\n')}</ul>`;
 }
 
-export function sharedHtml(html) {
-  return html.replace('<!-- site:header -->', () => read('src/partials/header.html'))
+export function sharedHtml(html, context) {
+  const articles = readAnnouncements();
+  const page = html.replace('<!-- site:header -->', () => read('src/partials/header.html'))
     .replace('<!-- site:footer -->', () => read('src/partials/footer.html'))
     .replace('<!-- site:parents-header -->', () => read('src/partials/parents-header.html'))
     .replace('<!-- site:parents-footer -->', () => read('src/partials/parents-footer.html'))
-    .replace('<!-- site:latest-news -->', () => newsList(readAnnouncements().slice(0, 3)));
+    .replace('<!-- site:latest-news -->', () => newsList(articles.slice(0, 3)));
+  return seoHtml(page, context, articles);
 }
 
 export function generatePages() {
@@ -52,6 +55,7 @@ export function generatePages() {
     inputs[path] = output;
   }
   write('parents/index.html', {}, read('templates/parents.html'));
+  write('404.html', {}, read('templates/not-found.html'));
   write('news/index.html', {
     title: 'お知らせ一覧', description: 'らしんばの最新のお知らせと開発状況をご紹介します。',
     breadcrumbs: crumbs(['<span aria-current="page">お知らせ一覧</span>']),
@@ -74,7 +78,7 @@ export function generatePages() {
   for (const article of articles) {
     const data = { ...article, title: escape(article.title), displayDate: article.date.replaceAll('-', '.') };
     write(`news/${article.slug}/index.html`, {
-      title: data.title, description: data.title,
+      title: data.title, description: escape(article.description || plainText(article.body).slice(0, 150) || article.title),
       breadcrumbs: crumbs(['<a href="/news/">お知らせ一覧</a>', `<span aria-current="page">${data.title}</span>`]),
       content: render(read('templates/article.html'), data),
     });
