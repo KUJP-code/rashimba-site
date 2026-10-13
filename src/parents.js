@@ -1,12 +1,13 @@
 import './main.js';
 import './parents.scss';
 import { initCarousel } from './carousel.js';
+import { initInquiryForm } from './inquiry-form.js';
+import { inquiryConfig } from './inquiry-config.js';
 
-const form = document.querySelector('#parents-notification');
-form.addEventListener('submit', (event) => {
-  // Native validation runs first. Remove this handler and set the form action
-  // when the release notification backend is ready.
-  event.preventDefault();
+initInquiryForm(document.querySelector('#parents-notification'), {
+  ...inquiryConfig,
+  endpoint: '/api/rashimba/release_notifications',
+  action: 'rashimba_release_notification',
 });
 
 initCarousel({

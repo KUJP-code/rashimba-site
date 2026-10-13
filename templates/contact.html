@@ -3,27 +3,27 @@
     <h1 id="enquiry-title">スポンサー資料をもらう</h1>
     <p>ご質問やご相談など、お気軽にお問い合わせください。</p>
   </div>
-  <!-- Set action to your backend endpoint, then remove the submit handler in src/main.js. -->
-  <form class="enquiry-form" id="sponsor-enquiry" method="post" action="/contact/">
+  <form class="enquiry-form" id="sponsor-enquiry" method="post" action="https://kids-up.app/api/rashimba/sponsor_inquiries">
+    <div class="form-honeypot" aria-hidden="true"><label>Website<input name="website" tabindex="-1" autocomplete="off" /></label></div>
     <div class="form-field">
       <label for="company">会社名 <span class="required-label">必須</span></label>
-      <input id="company" name="company" autocomplete="organization" placeholder="（例）株式会社Kids-UP" required />
+      <input id="company" name="company" autocomplete="organization" maxlength="200" placeholder="（例）株式会社Kids-UP" required />
     </div>
     <div class="form-field">
       <label for="email">メールアドレス <span class="required-label">必須</span></label>
-      <input id="email" name="email" type="email" autocomplete="email" placeholder="（例）rashimba@example.com" required />
+      <input id="email" name="email" type="email" autocomplete="email" maxlength="254" placeholder="（例）rashimba@example.com" required />
     </div>
     <div class="form-field">
       <label for="name">お名前 <span class="required-label">必須</span></label>
-      <input id="name" name="name" autocomplete="name" placeholder="（例）らしんば 太郎" required />
+      <input id="name" name="name" autocomplete="name" maxlength="200" placeholder="（例）らしんば 太郎" required />
     </div>
     <div class="form-field">
       <label for="phone">電話番号</label>
-      <input id="phone" name="phone" type="tel" autocomplete="tel" placeholder="（例）09012345678" />
+      <input id="phone" name="phone" type="tel" autocomplete="tel" maxlength="40" placeholder="（例）09012345678" />
     </div>
     <div class="form-field">
       <label for="message">備考</label>
-      <textarea id="message" name="message" rows="6"></textarea>
+      <textarea id="message" name="message" rows="6" maxlength="5000"></textarea>
     </div>
     <div class="form-consent">
       <input id="privacy-consent" name="privacyConsent" type="checkbox" value="accepted" required />

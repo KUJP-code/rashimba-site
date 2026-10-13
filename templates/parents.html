@@ -89,8 +89,9 @@
       </div></section>
       <section id="signup" class="parents-signup section"><div class="container narrow">
         <div class="parents-signup-heading"><h2>まずは、配信のお知らせから</h2><p>2026年12月の配信開始を、メールにてお知らせいたします。</p></div>
-        <form id="parents-notification" class="enquiry-form" method="post" action="/parents/">
-          <div class="form-field"><label for="notification-email">メールアドレス <span class="required-label">必須</span></label><input id="notification-email" type="email" name="email" autocomplete="email" placeholder="（例）rashimba@example.com" required /></div>
+        <form id="parents-notification" class="enquiry-form" method="post" action="https://kids-up.app/api/rashimba/release_notifications">
+          <div class="form-honeypot" aria-hidden="true"><label>Website<input name="website" tabindex="-1" autocomplete="off" /></label></div>
+          <div class="form-field"><label for="notification-email">メールアドレス <span class="required-label">必須</span></label><input id="notification-email" type="email" name="email" autocomplete="email" maxlength="254" placeholder="（例）rashimba@example.com" required /></div>
           <div class="form-field"><label for="child-age">お子様の年齢（任意）</label><select id="child-age" name="child_age"><option value="">選択してください</option><option value="0-2">0〜2歳</option><option value="3-5">3〜5歳</option><option value="6-8">6〜8歳</option><option value="9-12">9〜12歳</option><option value="13+">13歳以上</option></select></div>
           <div class="parents-consent"><label class="form-consent"><input type="checkbox" name="privacy_consent" value="agreed" required /><span>プライバシーポリシーに同意する</span></label><p>ご登録いただいたメールアドレスは、配信開始のお知らせおよびらしんばに関するご案内にのみ使用いたします。<a href="/privacy/" target="_blank" rel="noopener noreferrer">プライバシーポリシーを確認する。</a></p></div>
           <button class="button button-green" type="submit">配信のお知らせを受け取る</button>

@@ -1,6 +1,8 @@
 import './styles.js';
 import { siteLinks } from './config.js';
 import { initCarousel } from './carousel.js';
+import { initInquiryForm } from './inquiry-form.js';
+import { inquiryConfig } from './inquiry-config.js';
 
 const menuToggle = document.querySelector('.menu-toggle');
 const menu = document.querySelector('#mobile-menu');
@@ -60,11 +62,10 @@ notice.addEventListener('click', (event) => {
   }
 });
 
-const enquiryForm = document.querySelector('#sponsor-enquiry');
-enquiryForm?.addEventListener('submit', (event) => {
-  // Backend integration point: native field validation runs before this event.
-  // Remove this handler when the form's POST endpoint is connected.
-  event.preventDefault();
+initInquiryForm(document.querySelector('#sponsor-enquiry'), {
+  ...inquiryConfig,
+  endpoint: '/api/rashimba/sponsor_inquiries',
+  action: 'rashimba_sponsor',
 });
 
 initCarousel({

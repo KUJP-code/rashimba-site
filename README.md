@@ -67,15 +67,19 @@ The production build includes `dist/privacy/index.html` and `dist/terms/index.ht
 
 Set `crowdfunding` in `src/config.js` when the CAMPFIRE project URL is ready. Campaign copy and dates are editable in `templates/parents.html`.
 
-The release notification form validates the required email address and privacy consent; the child age selector is optional. Valid submission preserves values and sends no request. To connect the backend, set the form action in `templates/parents.html` and remove the submit listener in `src/parents.js`. Its method is `POST` and fields are `email`, `child_age`, and `privacy_consent`. The privacy policy opens in a new tab.
+The release notification form validates email and privacy consent; child age is optional. It submits to `POST https://kids-up.app/api/rashimba/release_notifications` with `email`, `child_age`, and `privacy_consent`. The shared handler in `src/inquiry-form.js` shows success/error feedback, preserves values on failure, and prevents duplicate submissions during a request. The privacy policy opens in a new tab.
 
 Original assets and source frames are recorded in `docs/parents-design-assets.json`. A few gameplay and campaign nodes contain multiple image fills: available source exports are used where Figma’s Starter-plan tool limit prevented retrieving the visible fill. Layout, image slots, and responsive behavior follow the supplied frames.
 
 ## Inquiry backend
 
-The form at `/contact/` follows the Figma layout. Company, email, name, and privacy consent are required; phone and notes are optional. Browser validation is enabled. Valid submission currently does nothing, preserves the entered values, and sends no request.
+The form at `/contact/` follows the Figma layout. Company, email, name, and privacy consent are required; phone and notes are optional. It submits to `POST https://kids-up.app/api/rashimba/sponsor_inquiries`. Browser and server validation apply.
 
-When the backend is ready, set the form's `action` in `templates/contact.html` to your endpoint and remove the `enquiryForm` submit listener in `src/main.js`. Its method is already `POST`, with fields `company`, `email`, `name`, `phone`, `message`, and `privacyConsent`. Add the intended success/error behavior alongside the backend. The privacy policy destination defaults to `/privacy/` in `src/config.js`.
+Both forms send flat JSON without cookies, with a UUID `submission_key`, a honeypot, and a fresh reCAPTCHA v3 token. Retrying unchanged values after a network failure reuses the UUID. The Rails API persists the inquiry and queues separate confirmation/internal emails from `donotreply@rashimba.com`; the internal recipient is `j-kusaka@kids-up.jp`. Only Rails admins can read or manage saved inquiries.
+
+Before a production build, set `VITE_RASHIMBA_RECAPTCHA_SITE_KEY` to a public reCAPTCHA v3 key registered for the frontend domain. Its corresponding `RASHIMBA_RECAPTCHA_SECRET_KEY` belongs only on Rails. `VITE_RASHIMBA_API_BASE_URL` defaults to `https://kids-up.app`; copy `.env.example` to `.env.local` to override for development. The Rails origin allowlist must include the actual frontend origin. Production fails closed if CAPTCHA is unavailable. SES verification/DNS and Rails deployment details are in `../seasonal/docs/rashimba-inquiries.md`. The privacy policy destination defaults to `/privacy/` in `src/config.js`.
+
+Run `node --test tests/inquiry-form.test.js` for form submission/retry checks.
 
 ## Figma source
 
@@ -93,6 +97,6 @@ File: [らしんば — Draft v3](https://www.figma.com/design/QWpPPgqMp6KFqeTyO
 
 The desktop and mobile drafts contain small copy differences, including the 「日本初」 footnote. Those footnotes follow their respective frames. The mobile carousel keeps its controls below the complete card text to prevent the overlap present in the draft. Both carousels use one real pagination button per image (three sponsor images, four parent images); buttons are generated from the cards so adding an image also adds its dot. The selected card is centered, with the active dot synchronized across buttons, keyboard navigation, manual scrolling, and responsive resizing. Decorative dot images are no longer used.
 
-Local Chrome checks cover 320, 390, 768, 1024, and 1440 pixel viewports, image loading, page overflow, mobile menu navigation and keyboard focus, navbar underline behavior, archive/article links, and inquiry form validation without sending a POST.
+Local Chrome checks cover 320, 390, 768, 1024, and 1440 pixel viewports, image loading, page overflow, mobile menu navigation and keyboard focus, navbar underline behavior, archive/article links, and inquiry form validation. Inquiry integration checks cover API requests and retry behavior with mocked network responses; they send no live email.
 
 Parent-page Chrome checks cover the same five viewport widths, original asset loading, responsive overflow, both directions of sponsor/parent navigation, mobile menu focus and anchor navigation, carousel arrows/dots/keyboard/touch scrolling, the unconfigured CAMPFIRE notice, and release notification validation with no POST.
