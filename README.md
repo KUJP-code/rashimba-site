@@ -35,7 +35,7 @@ SEO metadata, canonical URLs, structured data, `sitemap.xml`, and `robots.txt` a
 - `public/assets/`: original images and SVGs downloaded from Figma.
 - Noto Sans JP and Poppins are bundled locally through Fontsource.
 
-Sponsor buttons lead to `/contact/`; the news archive is at `/news/`, and the privacy policy is at `/privacy/`. `src/config.js` can override these destinations. The parent page is at `/parents/`, with links back to the sponsor page. The CAMPFIRE project and commercial disclosure destinations show a preparation notice until configured.
+Sponsor buttons lead to `/contact/`; the news archive is at `/news/`, and the privacy policy is at `/privacy/`. `src/config.js` can override these destinations. The parent page is at `/parents/`, with links back to the sponsor page. Its CAMPFIRE button links to https://camp-fire.jp/projects/963630. The commercial disclosure destination shows a preparation notice until configured.
 
 ## Adding an announcement
 
@@ -67,7 +67,7 @@ The production build includes `dist/privacy/index.html` and `dist/terms/index.ht
 
 `/parents/` follows the Draft v3 desktop and mobile parent frames, with parent-specific navigation and the existing mobile menu behavior. The four shops can be browsed using the arrow buttons, dots, keyboard arrows, or horizontal touch scrolling. The navigation retains the animated underline. Release notification buttons link to `#signup`; sponsor buttons link to `/`.
 
-Set `crowdfunding` in `src/config.js` when the CAMPFIRE project URL is ready. Campaign copy and dates are editable in `templates/parents.html`.
+The CAMPFIRE project URL is configured in `src/config.js` and the static button in `templates/parents.html`, so it also works without JavaScript. Campaign copy and dates are editable in `templates/parents.html`.
 
 The release notification form validates email and privacy consent; child age is optional. It submits to `POST https://kids-up.app/api/rashimba/release_notifications` with `email`, `child_age`, and `privacy_consent`. The shared handler in `src/inquiry-form.js` shows success/error feedback, preserves values on failure, and prevents duplicate submissions during a request. The privacy policy opens in a new tab.
 

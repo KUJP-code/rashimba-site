@@ -3,7 +3,7 @@
 export const siteLinks = {
   sponsorEnquiryUrl: '/contact/',
   parents: '/parents/',
-  crowdfunding: '',
+  crowdfunding: 'https://camp-fire.jp/projects/963630',
   news: '/news/',
   privacy: '/privacy/',
   legal: '',
