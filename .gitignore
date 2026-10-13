@@ -9,6 +9,7 @@ dist/
 /privacy/
 /terms/
 /parents/
+/404.html
 
 # Local build settings; never commit secret keys.
 .env
