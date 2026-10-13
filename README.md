@@ -18,11 +18,6 @@ npm run preview
 
 Deploy the generated `dist/` directory to any static host. No backend or runtime framework is required.
 
-For GitHub branch deployments and externally managed DNS, follow
-[the Cloudflare Pages setup guide](docs/cloudflare-pages.md). Use `staging` for
-review and promote into `deploy` for release. The Cloudflare build generates
-environment-specific indexing headers automatically.
-
 ## Content and styling
 
 - `index.html`: Japanese page content and semantic markup.
