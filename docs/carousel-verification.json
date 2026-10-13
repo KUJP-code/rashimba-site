@@ -1,0 +1,92 @@
+{
+  "date": "2026-10-13",
+  "build": "npm run build passed",
+  "browser": "Headless Google Chrome",
+  "cases": [
+    {
+      "path": "/",
+      "width": 320,
+      "images": 3,
+      "dots": 3,
+      "controls": "passed",
+      "swipeScrollSync": "passed",
+      "resize": "passed",
+      "smoothAndRapidClicks": "passed"
+    },
+    {
+      "path": "/parents/",
+      "width": 320,
+      "images": 4,
+      "dots": 4,
+      "controls": "passed",
+      "swipeScrollSync": "passed",
+      "resize": "passed",
+      "smoothAndRapidClicks": "passed"
+    },
+    {
+      "path": "/",
+      "width": 390,
+      "images": 3,
+      "dots": 3,
+      "controls": "passed",
+      "swipeScrollSync": "passed",
+      "resize": "passed",
+      "smoothAndRapidClicks": "passed"
+    },
+    {
+      "path": "/parents/",
+      "width": 390,
+      "images": 4,
+      "dots": 4,
+      "controls": "passed",
+      "swipeScrollSync": "passed",
+      "resize": "passed",
+      "smoothAndRapidClicks": "passed"
+    },
+    {
+      "path": "/",
+      "width": 768,
+      "images": 3,
+      "dots": 3,
+      "controls": "passed",
+      "swipeScrollSync": "passed",
+      "resize": "passed",
+      "smoothAndRapidClicks": "passed"
+    },
+    {
+      "path": "/parents/",
+      "width": 768,
+      "images": 4,
+      "dots": 4,
+      "controls": "passed",
+      "swipeScrollSync": "passed",
+      "resize": "passed",
+      "smoothAndRapidClicks": "passed"
+    },
+    {
+      "path": "/",
+      "width": 1440,
+      "images": 3,
+      "dots": 3,
+      "controls": "passed",
+      "swipeScrollSync": "passed",
+      "resize": "passed",
+      "smoothAndRapidClicks": "passed"
+    },
+    {
+      "path": "/parents/",
+      "width": 1440,
+      "images": 4,
+      "dots": 4,
+      "controls": "passed",
+      "swipeScrollSync": "passed",
+      "resize": "passed",
+      "smoothAndRapidClicks": "passed"
+    }
+  ],
+  "nativeTouchSwipes": {
+    "sponsor": "Passed: swipe selected image 2 and dot 2, centered exactly",
+    "parents": "Passed: swipe selected image 2 and dot 2, centered exactly"
+  },
+  "behavior": "One generated dot per card; one active green dot; every image has a distinct centered position; selection persists across desktop/mobile resizing."
+}

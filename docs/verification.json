@@ -38,10 +38,37 @@
     "Horizontal overflow",
     "Mobile menu open and section navigation",
     "Carousel previous and next controls",
-    "Unconfigured enquiry feedback"
+    "SP_menu layout and original close icon",
+    "Mobile menu scroll lock, focus wrapping and Escape",
+    "Navbar underline hover, exit and reduced motion; CTA buttons excluded",
+    "Announcement archive and article navigation",
+    "Article add, edit and remove with live reload",
+    "HTML title escaping and announcement sorting",
+    "Inquiry required fields, email validation and consent",
+    "Valid inquiry preserves values and sends no POST",
+    "Privacy policy full text, all 20 articles and 65 table rows match the supplied document",
+    "Terms full text, all 26 articles and 9 table rows match the supplied document",
+    "Legal pages at five viewport widths with horizontally scrollable wide tables",
+    "Privacy footer link and form consent link preserve entered values",
+    "Standalone terms have no sponsor navigation, enquiry buttons or website menu link",
+    "Privacy and terms direct routes work with JavaScript disabled"
   ],
   "figmaFrames": [
     "270:9793",
-    "270:10269"
+    "270:10269",
+    "287:12518",
+    "152:2590",
+    "152:3255",
+    "152:3401"
+  ],
+  "verifiedDate": "2026-10-13",
+  "pages": [
+    "/",
+    "/news/",
+    "/news/site-release/",
+    "/news/development-update/",
+    "/contact/",
+    "/privacy/",
+    "/terms/"
   ]
 }

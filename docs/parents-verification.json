@@ -1,0 +1,295 @@
+{
+  "viewports": [
+    {
+      "width": 320,
+      "overflow": false,
+      "missing": [],
+      "sections": [
+        {
+          "name": "parents-hero",
+          "y": 73,
+          "height": 603
+        },
+        {
+          "name": "promise",
+          "y": 676,
+          "height": 1386
+        },
+        {
+          "name": "strengths",
+          "y": 2062,
+          "height": 1654
+        },
+        {
+          "name": "how-to-play",
+          "y": 3717,
+          "height": 3088
+        },
+        {
+          "name": "crowdfunding",
+          "y": 6804,
+          "height": 655
+        },
+        {
+          "name": "faq",
+          "y": 7459,
+          "height": 1688
+        },
+        {
+          "name": "signup",
+          "y": 9148,
+          "height": 829
+        },
+        {
+          "name": "parents-sources sources",
+          "y": 0,
+          "height": 0
+        },
+        {
+          "name": "site-footer",
+          "y": 9977,
+          "height": 573
+        }
+      ],
+      "brokenAnchors": []
+    },
+    {
+      "width": 390,
+      "overflow": false,
+      "missing": [],
+      "sections": [
+        {
+          "name": "parents-hero",
+          "y": 73,
+          "height": 603
+        },
+        {
+          "name": "promise",
+          "y": 676,
+          "height": 1288
+        },
+        {
+          "name": "strengths",
+          "y": 1964,
+          "height": 1645
+        },
+        {
+          "name": "how-to-play",
+          "y": 3609,
+          "height": 3070
+        },
+        {
+          "name": "crowdfunding",
+          "y": 6679,
+          "height": 660
+        },
+        {
+          "name": "faq",
+          "y": 7338,
+          "height": 1489
+        },
+        {
+          "name": "signup",
+          "y": 8828,
+          "height": 779
+        },
+        {
+          "name": "parents-sources sources",
+          "y": 0,
+          "height": 0
+        },
+        {
+          "name": "site-footer",
+          "y": 9607,
+          "height": 535
+        }
+      ],
+      "brokenAnchors": []
+    },
+    {
+      "width": 768,
+      "overflow": false,
+      "missing": [],
+      "sections": [
+        {
+          "name": "parents-hero",
+          "y": 73,
+          "height": 566
+        },
+        {
+          "name": "promise",
+          "y": 639,
+          "height": 1080
+        },
+        {
+          "name": "strengths",
+          "y": 1719,
+          "height": 1002
+        },
+        {
+          "name": "how-to-play",
+          "y": 2722,
+          "height": 2533
+        },
+        {
+          "name": "crowdfunding",
+          "y": 5254,
+          "height": 436
+        },
+        {
+          "name": "faq",
+          "y": 5690,
+          "height": 1649
+        },
+        {
+          "name": "signup",
+          "y": 7340,
+          "height": 911
+        },
+        {
+          "name": "parents-sources sources",
+          "y": 8251,
+          "height": 185
+        },
+        {
+          "name": "site-footer",
+          "y": 8435,
+          "height": 364
+        }
+      ],
+      "brokenAnchors": []
+    },
+    {
+      "width": 1024,
+      "overflow": false,
+      "missing": [],
+      "sections": [
+        {
+          "name": "parents-hero",
+          "y": 73,
+          "height": 566
+        },
+        {
+          "name": "promise",
+          "y": 639,
+          "height": 1053
+        },
+        {
+          "name": "strengths",
+          "y": 1692,
+          "height": 1001
+        },
+        {
+          "name": "how-to-play",
+          "y": 2694,
+          "height": 2551
+        },
+        {
+          "name": "crowdfunding",
+          "y": 5245,
+          "height": 436
+        },
+        {
+          "name": "faq",
+          "y": 5681,
+          "height": 1622
+        },
+        {
+          "name": "signup",
+          "y": 7304,
+          "height": 911
+        },
+        {
+          "name": "parents-sources sources",
+          "y": 8215,
+          "height": 165
+        },
+        {
+          "name": "site-footer",
+          "y": 8380,
+          "height": 364
+        }
+      ],
+      "brokenAnchors": []
+    },
+    {
+      "width": 1440,
+      "overflow": false,
+      "missing": [],
+      "sections": [
+        {
+          "name": "parents-hero",
+          "y": 73,
+          "height": 566
+        },
+        {
+          "name": "promise",
+          "y": 639,
+          "height": 1053
+        },
+        {
+          "name": "strengths",
+          "y": 1692,
+          "height": 953
+        },
+        {
+          "name": "how-to-play",
+          "y": 2646,
+          "height": 2649
+        },
+        {
+          "name": "crowdfunding",
+          "y": 5295,
+          "height": 436
+        },
+        {
+          "name": "faq",
+          "y": 5731,
+          "height": 1622
+        },
+        {
+          "name": "signup",
+          "y": 7354,
+          "height": 911
+        },
+        {
+          "name": "parents-sources sources",
+          "y": 8265,
+          "height": 165
+        },
+        {
+          "name": "site-footer",
+          "y": 8430,
+          "height": 367
+        }
+      ],
+      "brokenAnchors": []
+    }
+  ],
+  "interactions": "passed",
+  "build": "npm run build passed",
+  "environment": "Production Vite preview, headless Google Chrome",
+  "figmaFrames": {
+    "desktop": "287:11565",
+    "mobile": "287:11951"
+  },
+  "checks": [
+    "Five viewport widths: 320, 390, 768, 1024, 1440",
+    "No horizontal overflow, missing images, JavaScript errors, or failed requests",
+    "Parent menu, focus trapping, Escape and anchor navigation",
+    "Shop carousel arrows, dots, keyboard and horizontal scrolling",
+    "Sponsor-to-parent and parent-to-sponsor navigation",
+    "Native email and privacy-consent validation; age optional",
+    "No POST before backend integration; values preserved",
+    "Privacy link opens the policy in another tab",
+    "Unconfigured CAMPFIRE destination opens preparation notice",
+    "Canonical /parents redirect preserves query parameters",
+    "Complete FAQ text checked against Figma, including inline spans",
+    "Every listed asset exists locally and is non-empty; no temporary asset URLs in production HTML"
+  ],
+  "limitations": [
+    "CAMPFIRE URL is not available yet; configurable in src/config.js.",
+    "Release notification backend is intentionally not connected.",
+    "Some gameplay and campaign nodes contain multiple image fills. Available original exports are used where the Figma Starter-plan tool limit prevented retrieving the visible fill."
+  ]
+}

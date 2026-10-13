@@ -1,0 +1,34 @@
+<section class="enquiry-page interior-content container narrow" aria-labelledby="enquiry-title" data-figma-node="152:3401">
+  <div class="enquiry-heading">
+    <h1 id="enquiry-title">スポンサー資料をもらう</h1>
+    <p>ご質問やご相談など、お気軽にお問い合わせください。</p>
+  </div>
+  <!-- Set action to your backend endpoint, then remove the submit handler in src/main.js. -->
+  <form class="enquiry-form" id="sponsor-enquiry" method="post" action="/contact/">
+    <div class="form-field">
+      <label for="company">会社名 <span class="required-label">必須</span></label>
+      <input id="company" name="company" autocomplete="organization" placeholder="（例）株式会社Kids-UP" required />
+    </div>
+    <div class="form-field">
+      <label for="email">メールアドレス <span class="required-label">必須</span></label>
+      <input id="email" name="email" type="email" autocomplete="email" placeholder="（例）rashimba@example.com" required />
+    </div>
+    <div class="form-field">
+      <label for="name">お名前 <span class="required-label">必須</span></label>
+      <input id="name" name="name" autocomplete="name" placeholder="（例）らしんば 太郎" required />
+    </div>
+    <div class="form-field">
+      <label for="phone">電話番号</label>
+      <input id="phone" name="phone" type="tel" autocomplete="tel" placeholder="（例）09012345678" />
+    </div>
+    <div class="form-field">
+      <label for="message">備考</label>
+      <textarea id="message" name="message" rows="6"></textarea>
+    </div>
+    <div class="form-consent">
+      <input id="privacy-consent" name="privacyConsent" type="checkbox" value="accepted" required />
+      <label for="privacy-consent"><a href="/privacy/" data-destination="privacy" target="_blank" rel="noopener">個人情報の取り扱い</a>に同意する</label>
+    </div>
+    <button class="button button-green" type="submit">送信する</button>
+  </form>
+</section>

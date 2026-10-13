@@ -1,9 +1,10 @@
 // Add the live destinations here when they are available.
-// sponsorEnquiryUrl accepts a web address, PDF URL, or mailto: address.
+// The local enquiry form and news archive are used by default.
 export const siteLinks = {
-  sponsorEnquiryUrl: '',
-  parents: '',
-  news: '',
-  privacy: '',
+  sponsorEnquiryUrl: '/contact/',
+  parents: '/parents/',
+  crowdfunding: '',
+  news: '/news/',
+  privacy: '/privacy/',
   legal: '',
 };

@@ -3,3 +3,11 @@ dist/
 .DS_Store
 .design/
 .qa/
+# Generated static pages; edit templates/ and content/news/.
+/news/
+/contact/
+/privacy/
+/terms/
+/parents/
+# Original office documents stay local; editable site copies are in content/legal/.
+/*.docx.odt

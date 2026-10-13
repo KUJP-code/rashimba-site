@@ -153,6 +153,37 @@
       "file": "public/assets/mobile-polygon2.svg",
       "figmaReference": "imgPolygon2",
       "frame": "270:10269"
+    },
+    {
+      "file": "public/assets/mobile-close.svg",
+      "figmaReference": "imgClose24DpE3E3E3Fill0Wght600Grad0Opsz241",
+      "frame": "287:12518"
+    },
+    {
+      "file": "public/assets/menu-logo.svg",
+      "figmaReference": "imgLogo",
+      "frame": "287:12518"
+    },
+    {
+      "file": "public/assets/page-logo.svg",
+      "figmaReference": "imgLogo1",
+      "frame": "152:3401"
+    },
+    {
+      "file": "public/assets/page-footer-logo.svg",
+      "figmaReference": "imgLogo",
+      "frame": "152:3401"
+    },
+    {
+      "file": "public/assets/breadcrumb-divider.svg",
+      "figmaReference": "imgLine4",
+      "frame": "152:3401"
     }
-  ]
+  ],
+  "additionalFrames": {
+    "mobileMenu": "287:12518",
+    "newsArchive": "152:2590",
+    "newsArticle": "152:3255",
+    "inquiryForm": "152:3401"
+  }
 }
