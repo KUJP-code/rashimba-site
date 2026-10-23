@@ -3,6 +3,7 @@ import { siteLinks } from './config.js';
 import { initCarousel } from './carousel.js';
 import { initInquiryForm } from './inquiry-form.js';
 import { inquiryConfig } from './inquiry-config.js';
+import { trackLead } from './analytics.js';
 
 const menuToggle = document.querySelector('.menu-toggle');
 const menu = document.querySelector('#mobile-menu');
@@ -66,6 +67,7 @@ initInquiryForm(document.querySelector('#sponsor-enquiry'), {
   ...inquiryConfig,
   endpoint: '/api/rashimba/sponsor_inquiries',
   action: 'rashimba_sponsor',
+  onAccepted: () => trackLead('sponsor_inquiry'),
 });
 
 initCarousel({

@@ -7,14 +7,19 @@ export const defaultSiteUrl = 'https://rashimba.com';
 
 export function siteOrigin(value = process.env.SITE_URL || defaultSiteUrl) {
   const url = new URL(value);
-  if (url.protocol !== 'https:' || url.pathname !== '/' || url.search || url.hash || url.username || url.password || url.port || url.hostname.endsWith('.pages.dev')) {
+  if (url.protocol !== 'https:' || url.pathname !== '/' || url.search || url.hash || url.username || url.password || url.port || url.hostname.endsWith('.pages.dev') || url.hostname.endsWith('.amplifyapp.com')) {
     throw new Error('SITE_URL must be the HTTPS origin of the official custom domain, such as https://rashimba.com');
   }
   return url.origin;
 }
 
 export function isStaging(env = process.env) {
-  return env.CF_PAGES_BRANCH ? env.CF_PAGES_BRANCH !== 'deploy' : env.CF_PAGES === '1';
+  const productionBranch = env.SITE_PRODUCTION_BRANCH || 'deploy';
+  // Pull-request builds can target the production branch; they are still previews.
+  if (env.AWS_PULL_REQUEST_ID) return true;
+  if (env.AWS_BRANCH) return env.AWS_BRANCH !== productionBranch;
+  if (env.AWS_APP_ID) return true; // An unidentified Amplify build must not be indexed.
+  return env.CF_PAGES_BRANCH ? env.CF_PAGES_BRANCH !== productionBranch : env.CF_PAGES === '1';
 }
 
 export function canonicalPath(path) {

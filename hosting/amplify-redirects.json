@@ -1,0 +1,52 @@
+[
+  {
+    "source": "https://www.rashimba.com",
+    "target": "https://rashimba.com",
+    "status": "301"
+  },
+  {
+    "source": "https://deploy.d3dwlzdpsg55wr.amplifyapp.com",
+    "target": "https://rashimba.com",
+    "status": "301"
+  },
+  {
+    "source": "/index.html",
+    "target": "/",
+    "status": "301"
+  },
+  {
+    "source": "/parents/index.html",
+    "target": "/parents/",
+    "status": "301"
+  },
+  {
+    "source": "/contact/index.html",
+    "target": "/contact/",
+    "status": "301"
+  },
+  {
+    "source": "/news/index.html",
+    "target": "/news/",
+    "status": "301"
+  },
+  {
+    "source": "/privacy/index.html",
+    "target": "/privacy/",
+    "status": "301"
+  },
+  {
+    "source": "/terms/index.html",
+    "target": "/terms/",
+    "status": "301"
+  },
+  {
+    "source": "/news/<slug>/index.html",
+    "target": "/news/<slug>/",
+    "status": "301"
+  },
+  {
+    "source": "/<*>",
+    "target": "/404.html",
+    "status": "404-200"
+  }
+]

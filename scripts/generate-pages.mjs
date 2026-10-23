@@ -2,6 +2,7 @@ import { readFileSync, readdirSync, mkdirSync, writeFileSync, rmSync } from 'nod
 import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { seoHtml, plainText } from './seo.mjs';
+import { analyticsHtml } from './analytics.mjs';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
 const read = (path) => readFileSync(resolve(root, path), 'utf8');
@@ -37,7 +38,7 @@ export function sharedHtml(html, context) {
     .replace('<!-- site:parents-header -->', () => read('src/partials/parents-header.html'))
     .replace('<!-- site:parents-footer -->', () => read('src/partials/parents-footer.html'))
     .replace('<!-- site:latest-news -->', () => newsList(articles.slice(0, 3)));
-  return seoHtml(page, context, articles);
+  return analyticsHtml(seoHtml(page, context, articles), context);
 }
 
 export function generatePages() {

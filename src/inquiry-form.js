@@ -33,6 +33,7 @@ export function initInquiryForm(form, {
   siteKey = '',
   fetchRequest = (...args) => fetch(...args),
   captchaToken = getRecaptchaToken,
+  onAccepted = () => {},
 } = {}) {
   if (!form) return;
   form.action = `${apiBaseUrl.replace(/\/$/, '')}${endpoint}`;
@@ -90,6 +91,8 @@ export function initInquiryForm(form, {
       if (JSON.stringify(Object.fromEntries(new FormData(form))) === fingerprint) form.reset();
       submissionKey = undefined;
       previousPayload = undefined;
+      // Optional reporting must never turn an accepted inquiry into a form error.
+      try { onAccepted(); } catch { /* Analytics may be blocked or unavailable. */ }
     } catch (error) {
       status.textContent = error.name === 'AbortError' || error instanceof TypeError
         ? '通信できませんでした。入力内容は保存されています。もう一度お試しください。'

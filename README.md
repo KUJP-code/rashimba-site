@@ -18,7 +18,64 @@ npm run preview
 
 Deploy the generated `dist/` directory to any static host. No backend or runtime framework is required.
 
-SEO metadata, canonical URLs, structured data, `sitemap.xml`, and `robots.txt` are generated at build time for `https://rashimba.com`. Set `SITE_URL` to change the official HTTPS origin. Cloudflare builds from `deploy` allow indexing on the custom domain; other branches and all `pages.dev` copies receive `noindex`. Optimized WebP copies are served where available, while the original Figma assets are retained. Run `node --test tests/*.test.*` for the SEO and form checks.
+SEO metadata, canonical URLs, structured data, `sitemap.xml`, and `robots.txt` are generated at build time for `https://rashimba.com`. Set `SITE_URL` to change the official HTTPS origin. Amplify builds from `deploy` allow indexing; other branches and pull-request previews receive `noindex`, an empty sitemap, and no analytics bootstrap. Optimized WebP copies are served where available, while the original Figma assets are retained. Run `node --test tests/*.test.*` for the analytics, SEO, and form checks.
+
+## AWS Amplify hosting and SEO
+
+The live app is **`rashimba-site`** (`d3dwlzdpsg55wr`, region `ap-northeast-1`), with the **`deploy`** branch serving `https://rashimba.com`. The working `staging` branch is not a production deployment. `amplify.yml` records the Node 22 / `npm ci` build, runs the tests, and publishes `dist/`.
+
+`scripts/seo.mjs` reads Amplify's `AWS_BRANCH` and `AWS_PULL_REQUEST_ID`. Only the production branch can be indexed; a pull-request build remains a preview even when it targets `deploy`. An Amplify build with an app ID but no branch name fails closed to `noindex`. If the production branch changes, set `SITE_PRODUCTION_BRANCH` accordingly (default `deploy`). `SITE_URL` must be the official HTTPS custom-domain origin; `amplifyapp.com` and `pages.dev` addresses are rejected as canonical origins. Preview HTML uses `noindex` rather than blocking crawlers in `robots.txt`, so crawlers can read that directive. Existing Cloudflare environment detection remains supported for legacy builds; the Cloudflare-only `_headers` file is not emitted for Amplify.
+
+Amplify uses the root **`customHttp.yml`**, rather than Cloudflare's `_headers`. The policy gives HTML, sitemaps, and unversioned content a five-minute CDN cache with browser revalidation, while Vite's versioned scripts, styles, and fonts receive a one-year immutable cache. The `/404.html` response also gets `X-Robots-Tag: noindex, nofollow`. AWS applies these headers after deployment; see the [Amplify custom-header documentation](https://docs.aws.amazon.com/amplify/latest/userguide/setting-custom-headers.html).
+
+**Routing rules are managed separately from the build.** `hosting/amplify-redirects.json` records the rules applied to the live app on October 22, 2026:
+
+- `www.rashimba.com` and the production `deploy.d3dwlzdpsg55wr.amplifyapp.com` hostname permanently redirect to `rashimba.com`, preserving page paths and query parameters. Future preview hostnames are not redirected to production.
+- Explicit `/index.html` aliases redirect to their canonical directory URLs; Amplify handles trailing slashes for directory indexes.
+- The last `404-200` rule rewrites missing URLs to the branded `/404.html`. Despite its API name, this was verified on this static Amplify app to return **HTTP 404**, retain the requested URL, and render the branded error page. The previous `404` rule issued a 302 redirect to a 200 error page. Do not replace this with a catch-all `200` rewrite to `/index.html`: this is a multi-page site.
+
+The JSON file is a record of app-level configuration; Amplify does **not** automatically load it from Git. To reapply it after an intentional routing change:
+
+```sh
+aws amplify update-app --app-id d3dwlzdpsg55wr --region ap-northeast-1 \
+  --custom-rules file://hosting/amplify-redirects.json
+```
+
+After deploying source/header changes, verify the official homepage, parent page, an article, `/robots.txt`, and `/sitemap.xml` return 200 with the intended cache headers. Confirm `www` and the production Amplify hostname return 301 to the corresponding official URL, and a fresh missing URL returns 404 with the branded page and no redirect. Preview builds must have `noindex`, an empty sitemap, and no analytics. Submit the official sitemap in Google Search Console if not already submitted; hosting migration does not change its URL. The titles, canonical URLs, and structured data remain independent of the hosting provider. See AWS's [redirect examples](https://docs.aws.amazon.com/amplify/latest/userguide/redirect-rewrite-examples.html) and [environment-variable reference](https://docs.aws.amazon.com/amplify/latest/userguide/environment-variables.html).
+
+## Website analytics (GA4)
+
+The website uses the direct Google tag for **`G-42DRXRM7E2`**. `scripts/analytics.mjs` adds a shared bootstrap to the HTML head during production builds; `src/analytics.js` loads Google's script asynchronously and initializes it once per document. There is no Google Tag Manager container or additional analytics dependency. Do not also paste a GA snippet into a footer or enable a second GA integration on the host, since that can double-count visits.
+
+Analytics starts immediately, without a consent banner, as requested by the site owner based on the existing policy. Google Signals and advertising personalization signals are disabled. The tag only loads on the exact official origin (`https://rashimba.com`, or the `SITE_URL` override). Local development, local production previews, Amplify/Cloudflare preview domains, non-production branches, and Amplify pull-request builds do not send analytics. The standalone `/terms/` page remains untracked because it is embedded in the app's WebView. This configuration is for the public website, not the app itself.
+
+The public measurement ID defaults to the value above. Override it with the build environment variable `GA_MEASUREMENT_ID`. Setting that variable to an empty string disables tracking after a rebuild and deployment. These build variables are read from the process environment (the shell or Amplify environment settings), not Vite's `.env` files. For example:
+
+```sh
+GA_MEASUREMENT_ID='' npm run build
+```
+
+### Measurement plan
+
+| Event | Trigger | Parameters added by this site |
+| --- | --- | --- |
+| `page_view` | Google's initial config command, once per tracked page load | Clean page URL and referrer; standard UTM campaign values when supplied |
+| `generate_lead` | Sponsor inquiry API returns HTTP 202 with `status: accepted` | `lead_type: sponsor_inquiry` |
+| `generate_lead` | Release-notification API returns HTTP 202 with `status: accepted` | `lead_type: release_notification` |
+
+The custom events never receive form values, API responses, submission UUIDs, or CAPTCHA tokens. Page location and referrer configuration omit query strings and fragments; the six standard `utm_*` campaign parameters are mapped separately for attribution. Keep personal information out of campaign values and link URLs. Google's enhanced measurement has additional automatic collection controlled in GA4, so review those settings as described below. A successful API response measures acceptance, not eventual email delivery; a response lost after server acceptance may leave that lead uncounted. Blocked analytics does not prevent form submission or change the success message.
+
+### GA4 setup and deployment verification
+
+1. In **Admin → Data streams**, select the Rashimba web stream and confirm its measurement ID is `G-42DRXRM7E2` and its website URL is `https://rashimba.com`.
+2. Open the stream's **Enhanced measurement** settings. Keep page-load views enabled; disable **Page changes based on browser history events** for this multi-page site. Disable **Form interactions** so raw submit attempts are not confused with API-accepted leads. Review the other automatic events for the data you want to collect. Leave automatic user-provided data collection off.
+3. In **Admin → Custom definitions**, create an event-scoped custom dimension named **Lead type**, using event parameter **`lead_type`**. Mark **`generate_lead`** as a key event if accepted inquiries and notification registrations are conversions you want to report together.
+4. Run `node --test tests/*.test.*` and `npm run build`, then deploy through the existing Amplify workflow on the `deploy` branch. A preview URL intentionally cannot confirm live collection.
+5. Open the deployed official domain in a browser without an analytics-blocking extension. In DevTools **Network**, confirm one `gtag/js?id=G-42DRXRM7E2` script request and a `g/collect` request with `tid=G-42DRXRM7E2` and `en=page_view`. Navigate between `/` and `/parents/` and confirm a single initial page-view event for each full page load. Multiple collection requests can occur for other event types.
+6. Use [Google Tag Assistant](https://tagassistant.google.com/) and GA4 **Realtime / DebugView** to confirm receipt. Check the cleaned page URL/referrer and UTM attribution in event details. Verify localhost and Amplify preview visits produce no Google tag or collection requests.
+7. For a conversion check, use an approved test inquiry: a real submission saves a record and queues email. Confirm exactly one `generate_lead` with the correct `lead_type` after success; validation or API errors should produce none. The automated tests mock the API and do not send email.
+
+Live collection and GA4 account settings require verification after deployment; a passing local build cannot confirm Google's receipt. Standard GA4 reports can take 24–48 hours to process data. See Google's [page-view behavior](https://developers.google.com/analytics/devguides/collection/ga4/views), [configuration reference](https://developers.google.com/analytics/devguides/collection/ga4/reference/config), [recommended events](https://developers.google.com/analytics/devguides/collection/ga4/reference/events), and [verification guide](https://developers.google.com/analytics/devguides/collection/ga4/troubleshoot).
 
 ## Content and styling
 

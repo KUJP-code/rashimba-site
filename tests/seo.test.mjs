@@ -6,13 +6,27 @@ const html=(title='らしんば',description='無料の英語学習アプリ')=>
 test('official origin rejects preview hosts, paths, credentials, and insecure protocols',()=>{
  assert.equal(siteOrigin('https://rashimba.com/'),'https://rashimba.com');
  assert.equal(siteOrigin('https://www.rashimba.com'),'https://www.rashimba.com');
- for(const value of ['https://preview.project.pages.dev','http://rashimba.com','https://rashimba.com/parents/','https://rashimba.com/?secret=1','https://user:pass@rashimba.com','https://rashimba.com:8443'])assert.throws(()=>siteOrigin(value));
+ for(const value of ['https://preview.project.pages.dev','https://deploy.example.amplifyapp.com','http://rashimba.com','https://rashimba.com/parents/','https://rashimba.com/?secret=1','https://user:pass@rashimba.com','https://rashimba.com:8443'])assert.throws(()=>siteOrigin(value));
 });
 test('only deploy builds are indexable on Cloudflare, including separate staging projects',()=>{
  assert.equal(isStaging({CF_PAGES_BRANCH:'deploy',CF_PAGES:'1'}),false);
  for(const CF_PAGES_BRANCH of ['staging','main','feature/seo'])assert.equal(isStaging({CF_PAGES_BRANCH}),true);
  assert.equal(isStaging({CF_PAGES:'1'}),true);
  assert.equal(isStaging({}),false);
+});
+test('Amplify production, branch previews, and PR builds get the correct indexing policy',()=>{
+ assert.equal(isStaging({AWS_APP_ID:'app',AWS_BRANCH:'deploy'}),false);
+ for(const env of [
+  {AWS_APP_ID:'app',AWS_BRANCH:'staging'},
+  {AWS_BRANCH:'main'},
+  {AWS_BRANCH:'feature/seo'},
+  {AWS_APP_ID:'app'},
+  {AWS_BRANCH:'deploy',AWS_PULL_REQUEST_ID:'42'},
+  {AWS_PULL_REQUEST_ID:'42'},
+  {AWS_BRANCH:'staging',CF_PAGES_BRANCH:'deploy'},
+ ])assert.equal(isStaging(env),true);
+ assert.equal(isStaging({AWS_BRANCH:'main',SITE_PRODUCTION_BRANCH:'main'}),false);
+ assert.equal(isStaging({AWS_BRANCH:'deploy',SITE_PRODUCTION_BRANCH:'main'}),true);
 });
 test('HTML entry files and query strings use one canonical URL',()=>{
  assert.equal(canonicalPath('/index.html?ref=test'),'/');

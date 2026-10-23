@@ -164,3 +164,42 @@ test('submits without loading reCAPTCHA when no site key is configured', async (
   assert.equal(form.status.dataset.state, 'success');
   assert.equal(form.resetCount, 1);
 });
+
+test('reports an accepted submission once, without passing any form data to the callback', async () => {
+  const form = makeForm();
+  const calls = [];
+  initInquiryForm(form, { ...defaults, fetchRequest: async () => accepted(),
+    onAccepted: (...args) => calls.push(args),
+  });
+  await form.submit();
+  assert.deepEqual(calls, [[]]);
+});
+
+test('failed, invalid, and unexpected responses never report a successful conversion', async () => {
+  for (const fetchRequest of [
+    async () => { throw new TypeError('Network failed'); },
+    async () => ({ ok: false, status: 422, json: async () => ({}) }),
+    async () => ({ ok: true, status: 200, json: async () => ({}) }),
+  ]) {
+    const form = makeForm();
+    let calls = 0;
+    initInquiryForm(form, { ...defaults, fetchRequest, onAccepted: () => { calls += 1; } });
+    await form.submit();
+    assert.equal(calls, 0);
+    form.valid = false;
+    await form.submit();
+    assert.equal(calls, 0);
+  }
+});
+
+test('analytics errors cannot change an accepted submission into a form failure', async () => {
+  const form = makeForm();
+  initInquiryForm(form, { ...defaults, fetchRequest: async () => accepted(),
+    onAccepted: () => { throw new Error('Analytics blocked'); },
+  });
+  await form.submit();
+  assert.equal(form.status.dataset.state, 'success');
+  assert.equal(form.status.textContent, 'Accepted');
+  assert.equal(form.resetCount, 1);
+  assert.equal(form.button.disabled, false);
+});

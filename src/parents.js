@@ -3,11 +3,13 @@ import './parents.scss';
 import { initCarousel } from './carousel.js';
 import { initInquiryForm } from './inquiry-form.js';
 import { inquiryConfig } from './inquiry-config.js';
+import { trackLead } from './analytics.js';
 
 initInquiryForm(document.querySelector('#parents-notification'), {
   ...inquiryConfig,
   endpoint: '/api/rashimba/release_notifications',
   action: 'rashimba_release_notification',
+  onAccepted: () => trackLead('release_notification'),
 });
 
 initCarousel({
